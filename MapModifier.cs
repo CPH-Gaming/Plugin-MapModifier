@@ -75,6 +75,12 @@ public partial class RetakesInstantPlant : BasePlugin
         RoundController roundController = RoundController.GetInstance();
         int roundWhenInitiated = roundController.GetCurrentRoundCounter();
 
+        AddTimer(25.0f, () =>
+        {
+            MapController mapController = MapController.GetInstance();
+            mapController.PerformEarlyMapSpecificAction(roundWhenInitiated);
+        }, TimerFlags.STOP_ON_MAPCHANGE);
+
         AddTimer(30.0f, () =>
         {
             MapController mapController = MapController.GetInstance();
